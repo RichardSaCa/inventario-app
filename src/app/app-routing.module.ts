@@ -3,13 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductoListaComponent } from './producto-lista/producto-lista.component';
 import { AgregarProductoComponent } from './agregar-producto/agregar-producto.component';
 import { EditarProductoComponent } from './editar-producto/editar-producto.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RedirectGuard } from './guards/redirect.guard';
+
 
 const routes: Routes = [
   //ruta por defaul
-  {path: 'productos', component: ProductoListaComponent},
-  {path: '', redirectTo: 'productos', pathMatch: 'full'},
-  {path: 'agregar-producto', component: AgregarProductoComponent},
-  {path: 'editar-producto/:id', component: EditarProductoComponent}
+  {path: 'login',
+  canActivate: [ RedirectGuard ],
+  component: LoginComponent},
+  {path: 'productos',
+  //implementamos el guardian con canActivate
+  canActivate: [ AuthGuard],
+  component: ProductoListaComponent},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'agregar-producto',canActivate: [ AuthGuard], component: AgregarProductoComponent},
+  {path: 'editar-producto/:id',canActivate: [ AuthGuard], component: EditarProductoComponent},
 ];
 
 @NgModule({
