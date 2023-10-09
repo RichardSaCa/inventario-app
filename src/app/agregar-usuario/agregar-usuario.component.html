@@ -1,0 +1,33 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="container text-center" style="margin: 30px">
+    <h3>Agregar Usuario</h3>
+  </div>
+
+  <!-- two way binging de angular, sinconismo vista y arhivo .ts del componente  -->
+  <!-- es necesario colocar tanto el id como name iguales  para lograr sincronizacion -->
+  <form name="myForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" name="username" class="form-control" id="username"   [(ngModel)]="user.username" required>
+    </div>
+    <div class="alert alert-danger" [ngStyle]="alert" role="alert">
+      <h6>{{message}}</h6>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email"  name="email"  class="form-control" id="email" [(ngModel)]="user.email" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" id="password" [(ngModel)]="user.password" required>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-warning btn-sm me-3" >Agregar</button>
+      <a href="/productos"  class="btn btn-danger btn-sm">Regresar</a>
+    </div>
+
+  </form>
+
+</div>
+

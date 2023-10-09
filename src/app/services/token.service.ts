@@ -21,4 +21,19 @@ export class TokenService {
   removeToken() {
     removeCookie('token-api');
   }
+
+  saveUsername(username: string){
+    setCookie('username', username, { expires: 365, path: '/' })
+  }
+
+  getUsername(): any{
+    const username = getCookie('username');
+    return username;
+  }
+
+  removeUsername(){
+    removeCookie('username');
+  }
+
+
 }

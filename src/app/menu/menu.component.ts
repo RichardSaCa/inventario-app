@@ -9,13 +9,17 @@ import { TokenService } from '../services/token.service';
 })
 export class MenuComponent implements OnInit {
 
+  username: any;
+
   constructor(private enrutador: Router, private tokenService: TokenService) { }
 
   ngOnInit(): void {
+    this.username= this.tokenService.getUsername();
   }
 
   logout(){
     this.tokenService.removeToken();
+    this.tokenService.removeUsername();
     this.irLogin();
   }
 

@@ -6,6 +6,7 @@ import { EditarProductoComponent } from './editar-producto/editar-producto.compo
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RedirectGuard } from './guards/redirect.guard';
+import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   component: ProductoListaComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'agregar-producto',canActivate: [ AuthGuard], component: AgregarProductoComponent},
+  {path: 'agregar-usuario',canActivate: [ AuthGuard], component: AgregarUsuarioComponent},
   {path: 'editar-producto/:id',canActivate: [ AuthGuard], component: EditarProductoComponent},
 ];
 

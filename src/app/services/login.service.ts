@@ -17,6 +17,7 @@ export class LoginService {
     .pipe(
       tap(response => {
         this.tokenService.saveToken(response.access_token);
+        this.tokenService.saveUsername(response.username);
         //console.log("refresh token: ",response.access_token);
       })
     );;

@@ -11,6 +11,11 @@ import { EditarProductoComponent } from './editar-producto/editar-producto.compo
 import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.component';
+import { ReactiveFormsModule } from '@angular/forms';
+//import { DataTablesModule } from 'angular-datatables';
+
+
 
 
 @NgModule({
@@ -21,12 +26,16 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     EditarProductoComponent,
     LoginComponent,
     MenuComponent,
+    AgregarUsuarioComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+
+
   ],
   //interceptores para que se pueda aplicar globalmente
   providers: [

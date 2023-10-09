@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producto } from './producto';
 //permite administrar el token
@@ -12,6 +12,7 @@ import { checkToken } from './interceptors/token.interceptor';
 
 export class ProductoService {
   private urlBase = "http://localhost:8080/inventario-app/productos";
+  private urlBase2 = "http://localhost:8080/inventario-app/reporte";
   //ejemplo de prueba para token:
   //private token = "iyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6Imh0dHA6Ly9pbnZlbnRhcmlvL2VqZW1wbG8iLCJpYXQiOjE2OTY2MDg4NDQsImV4cCI6MTY5NzkwNDg0NH0.xAtGeTc52m4AnwQszdUfUcjbdvpwB3js6BOY_vlrkJc";
   constructor(private clienteHttp: HttpClient, private tokenService: TokenService) { }
@@ -42,5 +43,9 @@ export class ProductoService {
 
   eliminarProducto(id: number): Observable<Object>{
     return this.clienteHttp.delete(`${this.urlBase}/${id}`,{ context: checkToken() });
+  }
+
+  descargarReporte(): Observable<Blob>{
+    return this.clienteHttp.get(this.urlBase2, {context: checkToken(), responseType: 'blob'});
   }
 }
