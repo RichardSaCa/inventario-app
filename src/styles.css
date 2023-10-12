@@ -1,1 +1,99 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  --primary: #1363A4;
+  --light: #ffffff;
+  --grey: #efefef;
+}
+
+body{
+  /* overflow: auto; */
+  font-family: Arial !important;
+  font-weight: 300;
+  color: var(--primary);
+  background-color: #F4F6F9;
+}
+.bg-dark{
+  background-color: var(--primary) !important;
+  color: var(--light);
+  font-family: Arial !important;
+  overflow-y: auto !important;
+    /* width: 180px; */
+  /* alto del menu lateral izquierdo */
+  /* height: 500px;  */
+}
+
+.main1{
+  overflow: auto ;
+  /* width: 180px; */
+  height: 500px;
+}
+.titulo{
+  font-size: 25px !important;
+  font-weight: 700;
+}
+.titulo2{
+  font-size: 18px !important;
+  font-weight: 700;
+  text-align: center;
+}
+.fs-4{
+  color: var(--light) !important;
+}
+.tam-letra{
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  font-family: Arial !important;
+  font-style: normal;
+  font-weight: bold;
+}
+.nav-pills li a:hover{
+  background-color: #8AA2C6;
+}
+
+.nav{
+ /* --Este margin permite configurar el ancho de cada item del menu */
+margin: -4.5px;
+}
+
+.nav-link{
+  /* configuracion para centrar el icono y texto de los item del menu */
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.fs-5{
+  /* Permite separar el icono de las letras en el menu */
+  margin-right: 10px;
+}
+.susp{
+  background-color: #8AA2C6 !important;
+  border-radius: 4px;
+}
+
+.dash{
+  background-color: #8AA2C6 !important;
+  border-radius: 4px;
+}
+
+#sidebar-container{
+  min-height: 100vh;
+}
+
+#sidebar-container .logo{
+  padding: .875rem 1.25rem;
+}
+
+#sidebar-container .menu{
+  width: 5;
+}
+
+.info{
+  font-size: 22px !important;
+  font-weight: 700;
+  text-align: center;
+}
+
+.table{
+  font-size: 13px;
+}

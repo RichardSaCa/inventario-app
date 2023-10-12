@@ -34,6 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    //DataTablesModule
+
 
 
   ],

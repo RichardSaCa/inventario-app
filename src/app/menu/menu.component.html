@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(19, 99, 19);">
     <div class="container-fluid">
       <a class="navbar-brand" href="/productos" >Sistema de Inventarios</a>
@@ -7,9 +7,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item"> -->
             <!-- mostrarse link como activo  -->
-            <a class="nav-link active" aria-current="page"href="/productos"
+            <!-- <a class="nav-link active" aria-current="page"href="/productos"
             >Inicio</a>
           </li>
           <li class="nav-item">
@@ -32,5 +32,89 @@
       </div>
     </div>
   </nav>
-</div>
+</div> -->
 
+<!-- <div  class="bg-dark col-auto  min-vh-100 d-flex flex-column justify-content-between">
+  <div class="bg-dark p-1"> -->
+                              <!-- menu para salir de la aplicacion -->
+                              <div class="dropdown-center  open p-3 text-center">
+                                <button class="btn btn-secondary dropdown-toggle border-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fs-4 icon ion-md-contact"></i>
+                                    <span sec:authentication="name">Usuario que hizo login</span>
+                                </button>
+                                <ul class="dropdown-menu text-center">
+                                    <li><a class="dropdown-item" href="#">
+                                        <i class="fs-3 icon ion-md-contact"></i>
+                                        </a></li>
+                                    <li><a class="dropdown-item" href="#">Usuario:</a></li>
+                                    <li><a class="dropdown-item" href="#"><span sec:authentication="name">Usuario que hizo login</span></a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li> <form method="POST"  id="formulario" th:action="@{/logout}" th:onsubmit="enviar(event)">
+
+                                        <button type="submit"  class="dropdown-item" href="#" > Salir</button>
+                                    </form>  </li>
+                                </ul>
+                            </div>
+
+                            <ul class="nav nav-pills flex-column mt-3">
+                                <li class="nav-item py-2 py-sm-0" id="dashboard">
+                                    <a th:href="@{/}" class="nav-link text-white">
+                                        <i class="fs-5 icon ion-md-apps fa-table-list"></i> <span class="tam-letra fs-4 d-none d-sm-inline">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item py-2 py-sm-0" id="proyectar_suspension">
+                                    <a th:href="@{/Suspension}" class="tam-letra nav-link text-white">
+                                        <i class="fs-5 icon ion-md-create fa-table-list"></i> <span class="tam-letra fs-4 d-none d-sm-inline">Proyectar Suspensión</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item py-2 py-sm-0" id="estados_suspension">
+                                    <a th:href="@{/estadoSuspension}" class="tam-letra nav-link text-white">
+                                        <i class="fs-5 icon ion-md-stats fa-table-list"> </i><span class="tam-letra fs-4 d-none d-sm-inline">Estados Suspensión</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item py-2 py-sm-0" id="proyectar_autorizacion">
+                                    <a  th:href="@{/proyectarAutorizacion}"  class="tam-letra nav-link text-white">
+                                        <i class="fs-5 icon ion-md-create fa-table-list"> </i><span class="tam-letra fs-4 d-none d-sm-inline">Proyectar Autorización</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item py-2 py-sm-0" id="estados_autorizacion">
+                                    <a th:href="@{/estadoAutorizacion}" class="tam-letra nav-link text-white">
+                                        <i class="fs-5 icon ion-md-stats fa-table-list"> </i><span class="tam-letra fs-4 d-none d-sm-inline">Estados Autorización</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item py-2 py-sm-0" id="consultar">
+                                    <a th:href="@{/Consultar}" class="tam-letra nav-link text-white">
+                                        <i class="fs-5 icon ion-md-search fa-table-list"> </i><span class="tam-letra fs-4 d-none d-sm-inline">Consultar</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item py-2 py-sm-0" id="reportes">
+                                    <a th:href="@{/Reporte}" class="tam-letra nav-link text-white">
+                                        <i class="fs-5 icon ion-md-download fa-table-list"></i> <span class="tam-letra fs-4 d-none d-sm-inline">Reportes</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item py-2 py-sm-0" id="gestion_usuarios">
+                                    <a th:href="@{/gestionUsuarios}" class="tam-letra nav-link text-white">
+                                        <i class="fs-5 icon ion-md-people fa-table-list"></i> <span class="tam-letra fs-4 d-none d-sm-inline">Gestión Usuarios</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item py-2 py-sm-0">
+                                    <a href="https://multimedia.unicauca.edu.co/documentos/sava/ManualUsuarioSAVA.pdf" target="_blank" class="tam-letra nav-link text-white">
+                                        <i class="fs-5 icon ion-md-help fa-table-list"></i> <span class="tam-letra fs-4 d-none d-sm-inline">Ayuda</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item py-2 py-sm-1">
+                                </li>
+                            </ul>
+                            <div class="mt-5 dropdown-center">
+                                <img th:src="@{/img/logo_sava.svg}"
+                                class=" mb-4 img-fluid" alt="Sample image">
+                            </div>
+  <!-- </div>
+</div> -->
