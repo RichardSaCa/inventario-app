@@ -13,7 +13,7 @@ import { MenuComponent } from './menu/menu.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.component';
 import { ReactiveFormsModule } from '@angular/forms';
-//import { DataTablesModule } from 'angular-datatables';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -34,7 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    //DataTablesModule
+    DataTablesModule
 
 
 

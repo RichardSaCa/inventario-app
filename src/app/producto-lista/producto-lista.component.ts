@@ -3,10 +3,14 @@ import { Producto } from '../producto';
 import { ProductoService } from '../producto.service';
 import { Route, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { DataTableDirective, DataTablesModule } from 'angular-datatables';
+//import DataTable from 'datatables.net-dt';
+//import 'datatables.net-select';
 
-import * as $ from 'jquery'
+// import * as $ from 'jquery'
+// import DataTable from 'datatables.net-dt';
 
-import 'datatables.net';
+//import 'datatables.net';
 //import 'datatables.net-dt/css/jquery.dataTables.css';
 //import 'datatables.net-select';
 
@@ -21,15 +25,15 @@ import 'datatables.net';
 export class ProductoListaComponent {
   productos: Producto[]; //importar la clase producto
   producto: Producto = new Producto();
- //dtoptions: DataTables.Settings = {};
-  //dtTrigger: Subject<any>=new Subject<any>();
+ dtoptions: DataTables.Settings = {};
+  dtTrigger: Subject<any>=new Subject<any>();
   constructor(private productoServicio: ProductoService, private enrutador: Router){}
 
   ngAfterViewInit(){
 
-    $(window).on("load", this.iniciar);
-     let api = $("#table1").DataTable();
-     api.destroy();
+    // $(window).on("load", this.iniciar1);
+    //  let api = $("#table1").DataTable();
+    //  api.destroy();
     $("#click").on("click", function(){
       console.log("HELLO WORLDDD");
     })
@@ -44,39 +48,115 @@ export class ProductoListaComponent {
 
     this.producto = new Producto();
 
-    // this.dtoptions.destroy;
-    // this.dtoptions = {
-    // stateSave: true,
-    // ordering: true,
-    // //  paging:false
-    // // lengthChange:true,
+    this.dtoptions.destroy;
+    this.dtoptions = {
+    stateSave: true,
+    ordering: true,
 
-    // language: {
-    //   url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-    // },
-    // lengthMenu: [
-    //   [5, 10, 20, -1],
-    //   [5, 10, 20, "TODO"],
-    // ],
-    // scrollY: "65vh", //65% de la pantalla se muestre la tabla
-    // scrollCollapse: true,
-    // paging: true,
-    // // scrollX: true,
-    // order: [[0, 'asc']],
-    // columnDefs: [
-    //   {targets: 0},{targets: 1},{targets: 2},{targets: 3},
+    //  paging:false
+    // lengthChange:true,
 
-    // ],
-    // };
+
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+    },
+    columnDefs: [
+      {
+        targets: [0], // Column index where you want the checkbox
+        orderable: false, // Make the column not sortable
+        className: 'select-checkbox', // Add a class to the column for styling
+        
+      },
+    ],
+  //   'columnDefs': [
+  //     {
+  //         'targets': 0,
+  //         'checkboxes': {
+  //         'selectRow': true
+  //         }
+  //     }
+  // ],
+
+    lengthMenu: [
+      [5, 10, 20, -1],
+      [5, 10, 20, "TODO"],
+    ],
+    scrollY: "65vh", //65% de la pantalla se muestre la tabla
+    scrollCollapse: true,
+    paging: true,
+    // scrollX: true,
+    order: [[0, 'asc']],
+
+
+    "drawCallback": function( settings ) {
+      var api = new $.fn.dataTable.Api( settings );
+
+      // Output the data for the visible rows to the browser's console
+      // You might do something more useful with it!
+      console.log( api);
+      let intVal = function (i: string | number): number {
+        if (typeof i === 'string') {
+          return Number(i.replace(/[\$,]/g, ''));
+        } else if (typeof i === 'number') {
+          return i;
+        } else {
+          return 0;
+        }
+     };
+     var totalHab = api
+        .column(3, {page: 'current'}) //solo la pagina actual de la columna 11
+        .data()
+        .reduce(function (a, b) {
+            return intVal(a) + intVal(b);
+        }, 0);
+      $(api.column(3).footer()).html(
+            `precio total ${totalHab}`
+           )
+
+  },
+    footerCallback: function ( row,settings, start, end, display ) {
+      //let api = $("#table1").DataTable();
+      let api = new $.fn.dataTable.Api(settings);
+      let intVal = function (i: string | number): number {
+        if (typeof i === 'string') {
+          return Number(i.replace(/[\$,]/g, ''));
+        } else if (typeof i === 'number') {
+          return i;
+        } else {
+          return 0;
+        }
+     };
+
+    console.log("DATOS: "+api);
+
+    // var totalHab = api
+    //     .column(3, {page: 'current'}) //solo la pagina actual de la columna 11
+    //     .data()
+    //     .reduce(function (a, b) {
+    //         return intVal(a) + intVal(b);
+    //     }, 0);
+
+    //   // va.column(3).footer().innerHTML='hola';
+    //   $(api.column(3).footer()).html(
+    //     `precio total ${totalHab}`
+    //   )
+    }
+
+
+    };
 
     //cargamos los productos
     this.obtenerProductos();
     //this.iniciar();
 
-
-
-
   }
+
+
+iniciar1(){
+  this.dtoptions = {
+    pagingType: 'full_numbers',
+  }
+}
 
 iniciar(){
 
@@ -136,7 +216,7 @@ obtenerProductos(){
     (datos => {
       this.productos = datos;
 
-      //this.dtTrigger.next(null);
+      this.dtTrigger.next(null);
     })
   )
 
