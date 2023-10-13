@@ -7,6 +7,8 @@ import { Subject } from 'rxjs';
 import * as $ from 'jquery'
 
 import 'datatables.net';
+//import 'datatables.net-dt/css/jquery.dataTables.css';
+//import 'datatables.net-select';
 
 
 
@@ -19,32 +21,28 @@ import 'datatables.net';
 export class ProductoListaComponent {
   productos: Producto[]; //importar la clase producto
   producto: Producto = new Producto();
-  valor1: string = 'd';
  //dtoptions: DataTables.Settings = {};
   //dtTrigger: Subject<any>=new Subject<any>();
   constructor(private productoServicio: ProductoService, private enrutador: Router){}
 
-  ngOnInit(){
+  ngAfterViewInit(){
 
-    let api = $("#table1").DataTable();
-    api.destroy();
+    $(window).on("load", this.iniciar);
+     let api = $("#table1").DataTable();
+     api.destroy();
     $("#click").on("click", function(){
       console.log("HELLO WORLDDD");
     })
 
 
-
-
-     $(window).on("load", this.iniciar);
+    //  $(document).ready(function(){
+      //this.iniciar();
+    //  })
     //this.iniciar
 
-    // $(document).ready(function () {
-
-  // })
-
     //limpiar productos para crear uno nuevo
-    this.producto = new Producto();
 
+    this.producto = new Producto();
 
     // this.dtoptions.destroy;
     // this.dtoptions = {
@@ -73,6 +71,8 @@ export class ProductoListaComponent {
 
     //cargamos los productos
     this.obtenerProductos();
+    //this.iniciar();
+
 
 
 
@@ -80,50 +80,67 @@ export class ProductoListaComponent {
 
 iniciar(){
 
- let  table = $("#table1").DataTable({
-  lengthMenu: [
-    [5, 10, 20, -1],
-    [5, 10,20, "TODO"],
-  ],
-  footerCallback: function ( row, data, start, end, display ) {
-    let api = $("#table1").DataTable();
-    let intVal = function (i: string | number): number {
-      if (typeof i === 'string') {
-        return Number(i.replace(/[\$,]/g, ''));
-      } else if (typeof i === 'number') {
-        return i;
-      } else {
-        return 0;
+    let  table =  $("#table1").DataTable({
+      stateSave: true,
+      ordering: true,
+      lengthMenu: [
+        [5, 10, 20, -1],
+        [5, 10,20, "TODO"],
+      ],
+      scrollY: "65vh", //65% de la pantalla se muestre la tabla
+      scrollCollapse: true,
+      paging: true,
+      scrollX: true,
+      //order: [[0, 'asc']],
+      columnDefs: [
+        {
+            orderable: false,
+            className: 'select-checkbox',
+            targets: 0,
+        }
+      ],
+      //select:true,
+
+    order: [[1, 'asc']],
+      footerCallback: function ( row, data, start, end, display ) {
+        let api = $("#table1").DataTable();
+        let intVal = function (i: string | number): number {
+          if (typeof i === 'string') {
+            return Number(i.replace(/[\$,]/g, ''));
+          } else if (typeof i === 'number') {
+            return i;
+          } else {
+            return 0;
+          }
+      };
+
+      var totalHab = api
+          .column(3, {page: 'current'}) //solo la pagina actual de la columna 11
+          .data()
+          .reduce(function (a, b) {
+              return intVal(a) + intVal(b);
+          }, 0);
+
+        // va.column(3).footer().innerHTML='hola';
+        $(api.column(3).footer()).html(
+          `precio total ${totalHab}`
+        )
       }
-  };
-
-  var totalHab = api
-      .column(2, {page: 'current'}) //solo la pagina actual de la columna 11
-      .data()
-      .reduce(function (a, b) {
-          return intVal(a) + intVal(b);
-      }, 0);
-
-    // va.column(3).footer().innerHTML='hola';
-    $(api.column(3).footer()).html(
-      `precio total ${totalHab}`
-    )
-  }
-
- });
+    });
 
 }
 
-  private obtenerProductos(){
-    //consumir datos del observalbe (suscribirnos)
-    this.productoServicio.obtenerProductoLista().subscribe(
-      (datos => {
-        this.productos = datos;
-        //this.dtTrigger.next(null);
+obtenerProductos(){
+  //consumir datos del observalbe (suscribirnos)
+  this.productoServicio.obtenerProductoLista().subscribe(
+    (datos => {
+      this.productos = datos;
 
-      })
-    )
-  }
+      //this.dtTrigger.next(null);
+    })
+  )
+
+}
 
   editarProducto(id: number){
     this.enrutador.navigate(['editar-producto', id])
@@ -171,7 +188,7 @@ iniciar(){
     //this.dtTrigger.unsubscribe();
     location.reload();
     this.enrutador.navigate(['/productos']);
-    this.ngOnInit();
+    //this.ngOnInit();
   }
 
 
