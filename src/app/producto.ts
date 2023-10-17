@@ -3,4 +3,5 @@ export class Producto {
   descripcion: string;
   precio: number;
   existencia: number;
+  select: boolean;
 }

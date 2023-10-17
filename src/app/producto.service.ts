@@ -13,6 +13,7 @@ import { checkToken } from './interceptors/token.interceptor';
 export class ProductoService {
   private urlBase = "http://localhost:8080/inventario-app/productos";
   private urlBase2 = "http://localhost:8080/inventario-app/reporte";
+  private urlBase3 = "http://localhost:8080/inventario-app/DeleteProductos";
   //ejemplo de prueba para token:
   //private token = "iyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6Imh0dHA6Ly9pbnZlbnRhcmlvL2VqZW1wbG8iLCJpYXQiOjE2OTY2MDg4NDQsImV4cCI6MTY5NzkwNDg0NH0.xAtGeTc52m4AnwQszdUfUcjbdvpwB3js6BOY_vlrkJc";
   constructor(private clienteHttp: HttpClient, private tokenService: TokenService) { }
@@ -43,6 +44,10 @@ export class ProductoService {
 
   eliminarProducto(id: number): Observable<Object>{
     return this.clienteHttp.delete(`${this.urlBase}/${id}`,{ context: checkToken() });
+  }
+
+  eliminarProductos(productos: Producto[]): Observable<Object>{
+    return this.clienteHttp.post(this.urlBase3,productos,{ context: checkToken() });
   }
 
   descargarReporte(): Observable<Blob>{

@@ -18,7 +18,7 @@
         <!-- <table class="table table-hover " id="table1"> -->
         <thead class="table-secondary">
           <tr>
-            <th></th>
+            <th scope="col"><input class="form-check-input" type="checkbox" [(ngModel)]="parentSelector" [value]="-1" (change)="onChange($event)"></th>
             <th scope="col">Id</th>
             <th scope="col">Descripción producto</th>
             <th scope="col">Precio</th>
@@ -28,7 +28,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let producto of productos">
-            <td></td>
+            <td>
+              <!-- <div class="custom-control custom-checkbox"> -->
+                <input type="checkbox"   class="form-check-input"  [value]="producto.idProducto" [checked]="producto.select" (change)="onChange($event)">
+              <!-- </div> -->
+            </td>
             <!-- utilizamos interpolacion {{}} -->
             <td>{{producto.idProducto}}</td>
             <td>{{producto.descripcion}}</td>
@@ -58,6 +62,18 @@
           Agregar Producto
         </button>
       </div>
+
+      <div class="container">
+        <button class="btn btn-success" (click)="checkbox()">Checkbox</button>
+      </div>
+
+      <div class="container " [ngStyle]="boton_eliminar">
+        <button class="btn btn-danger" (click)="eliminarProductos()">ELIMINAR</button>
+      </div>
+
+      <h1>nombre</h1>
+
+
 
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
